@@ -1,34 +1,33 @@
-import styled from "styled-components"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
-import Button from "./ui/Button";
-import Input from "./ui/Input";
-import Heading from "./ui/Heading";
-
-
-const StyledApp = styled.div`
-  background-color: orangered;
-  padding: 20px
-`;
-function App() {
+import Dashboard from "./pages/Dashboard";
+import Account from "./pages/Account";
+import Bookings from "./pages/Bookings";
+import Cabins from "./pages/Cabins";
+import Login from "./pages/Login";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
+import PageNotFound from "./pages/PageNotFound";
+import AppLayout from "./ui/AppLayout";
+export default function App() {
   return (
     <>
       <GlobalStyles />
-      <StyledApp>
-      <Heading as='h1'>
-        Click on the Vite and React logos to learn more
-      </Heading>
-      <Button>Check in</Button>
-      <Button>Check out</Button>
-      <Heading as='h2'>
-        Click on the Vite and React logos to learn more
-      </Heading>
-      <Heading as='h3'>
-        Click on the Vite and React logos to learn more
-      </Heading>
-      <Input placeholder="enter cabin"></Input>
-      </StyledApp>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="dashboard" />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="account" element={<Account />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="cabins" element={<Cabins />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="users" element={<Users />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
-
-export default App

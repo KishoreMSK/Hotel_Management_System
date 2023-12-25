@@ -59,7 +59,7 @@ export default function CabinRow({cabin}){
     <TableRow>
       <Img src={image} />
       <Cabin>{name}</Cabin>
-      <div>maximum can be {maxCapacity} guests</div>
+      <div>maximum allowed {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>{formatCurrency(discount)}</Discount>
       <button disabled={isDeleting} onClick={() => mutate(cabinId)}>Delete</button>

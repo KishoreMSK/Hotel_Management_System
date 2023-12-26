@@ -16,7 +16,7 @@ export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 //   const imageName = newCabin.image.name;
   const filePath = hasImagePath ? newCabin.image : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
-
+    console.log(newCabin, id);
   let query = supabase.from("cabins");
   //create cabin
   if (!id) {
@@ -38,6 +38,7 @@ export async function createEditCabin(newCabin, id) {
     throw new Error("Could not delete cabin");
   }
 
+  if(hasImagePath) return data;
   //uploading image
   const { error: uploadError } = await supabase.storage
     .from("cabin-images")
